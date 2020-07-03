@@ -1,5 +1,4 @@
 #include "Dino.h"
-
 #include <iostream>
 
 Dino::Dino(const std::string& _fileName) : Entity(_fileName) {
@@ -29,16 +28,16 @@ void Dino::CheckCollisions(const std::vector<Cactus>& _cacti)
 	bool isOverlapping{ false };
 	const sf::Vector2f dinoPosition = getPosition();
 	for (const auto& cactus : _cacti) {
-		const sf::Vector2f cactusPosition = cactus.getPosition();
-		
-		// 2-D AABB collision check
-		if ((dinoPosition.x < cactusPosition.x + cactus.GetSize()) &&
-			(cactusPosition.x < dinoPosition.x + m_size) &&
-			(dinoPosition.y < cactusPosition.y + cactus.GetSize()) &&
-			(cactusPosition.y < dinoPosition.y + m_size))
-		{
-			isOverlapping = true;
-			std::cout << "COLLISION OCCURED!" << std::endl;
+		if (cactus.IsVisible()) {
+			const sf::Vector2f cactusPosition = cactus.getPosition();
+			// 2-D AABB collision check
+			if ((dinoPosition.x < cactusPosition.x + cactus.GetSize()) &&
+				(cactusPosition.x < dinoPosition.x + m_size) &&
+				(dinoPosition.y < cactusPosition.y + cactus.GetSize()) &&
+				(cactusPosition.y < dinoPosition.y + m_size)) {
+				isOverlapping = true;
+				std::cout << "COLLISION OCCURED!" << std::endl;
+			}
 		}
 	}
 

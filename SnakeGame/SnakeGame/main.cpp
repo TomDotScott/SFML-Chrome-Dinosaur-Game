@@ -1,49 +1,58 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
-
 #include "Cactus.h"
 #include "Constants.h"
 #include "Dino.h"
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(constants::k_screenWidth, constants::k_screenHeight), "Chrome Snake Game");
-    window.setFramerateLimit(60);
-    Dino dino("dino.png");
-    std::vector<Cactus> cacti;
+int random_range(const int _min, const int _max) {
+	return _min + rand() % ((_max + 1) - _min);
+}
 
-    cacti.emplace_back("cactus.png");
+int main() {
+	srand(time(nullptr));
+	sf::RenderWindow window(sf::VideoMode(constants::k_screenWidth, constants::k_screenHeight), "Chrome Snake Game");
+	window.setFramerateLimit(60);
+	Dino dino("dino.png");
 
-    while (window.isOpen())
-    {
-        sf::Event event{};
-        while (window.pollEvent(event))
-        {
-          switch(event.type)
-          {
-            case sf::Event::Closed:
-              window.close();
-            break;
-            default:
-              break;
-          }
-        }
+	// basic object pooling
+	std::vector<Cactus> cactiPool;
+	cactiPool.reserve(10);
+	for (int i = 0; i < 10; i++) {
+		cactiPool.emplace_back("cactus.png");
+	}
 
-        window.clear(sf::Color::White);
+	while (window.isOpen()) {
+		sf::Event event{};
+		while (window.pollEvent(event)) {
+			switch (event.type) {
+			case sf::Event::Closed:
+				window.close();
+				break;
+			default:
+				break;
+			}
+		}
 
-    	for(auto& cactus : cacti)
-    	{
-            cactus.Update();
-            cactus.Render(window);
-    	}
-    	
-        dino.Update();
+		if(random_range(1, 100) == 1)
+		{
+			cactiPool[random_range(0, cactiPool.size() - 1)].MakeVisible();
+		}
+		
+		window.clear(sf::Color::White);
 
-        dino.CheckCollisions(cacti);
-    	
-        dino.Render(window);
+		for (auto& cactus : cactiPool) {
+			if (cactus.IsVisible()) {
+				cactus.Update();
+				cactus.Render(window);
+			}
+		}
 
-        window.display();
-    }
-    return 0;
+		dino.Update();
+
+		dino.CheckCollisions(cactiPool);
+
+		dino.Render(window);
+
+		window.display();
+	}
+	return 0;
 }
