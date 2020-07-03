@@ -7,7 +7,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(constants::k_screenWidth, constants::k_screenHeight), "Chrome Snake Game");
     window.setFramerateLimit(60);
-    Dino dino;
+    Dino dino("dino.png");
 
     while (window.isOpen())
     {

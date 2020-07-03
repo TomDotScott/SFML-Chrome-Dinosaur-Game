@@ -1,19 +1,15 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Constants.h"
+#include "Entity.h"
 
-class Dino {
+class Dino : public Entity {
 public:
-	Dino();
+	explicit Dino(const std::string& _fileName);
 	void Update();
-	void Render(sf::RenderWindow& _window);
+	// void Render(sf::RenderWindow& _window) const override = 0;
 private:
 	void Jump();
-
-	sf::Sprite m_sprite;
-	sf::Texture m_texture;
-	
-	sf::Vector2f m_position{ 50, constants::k_screenHeight - 50 };
 
 	// going here because it's the only thing affected by it
 	float m_gravity{ 0.75f };
