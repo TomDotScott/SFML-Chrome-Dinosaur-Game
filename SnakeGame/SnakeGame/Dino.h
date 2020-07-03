@@ -1,13 +1,17 @@
 #pragma once
+#include "Cactus.h"
 #include "Entity.h"
 
 class Dino final : public Entity {
 public:
 	explicit Dino(const std::string& _fileName);
 	void Update();
-	// void Render(sf::RenderWindow& _window) const override = 0;
+	
+	void CheckCollisions(const std::vector<Cactus>& _cacti);
 private:
 	void Jump();
+
+	bool m_isDead;
 
 	// going here because it's the only thing affected by it
 	float m_gravity{ 0.75f };

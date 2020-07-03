@@ -38,6 +38,9 @@ int main()
     	}
     	
         dino.Update();
+
+        dino.CheckCollisions(cacti);
+    	
         dino.Render(window);
 
         window.display();

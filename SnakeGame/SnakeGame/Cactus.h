@@ -8,8 +8,11 @@ public:
 		setPosition(constants::k_screenWidth + 100, constants::k_screenHeight - m_size);
 	};
 	void Update();
+
+	float GetSize() const { return m_size; }
+	
 private:
-	float m_size{ 50.f };
-	float m_speed{ 3.f };
+	float m_size{ 30.f };
+	float m_speed{ 8.f };
 };
 
