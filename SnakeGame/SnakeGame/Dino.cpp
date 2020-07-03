@@ -1,6 +1,8 @@
 #include "Dino.h"
 #include <iostream>
 
+#include "SoundManager.h"
+
 Dino::Dino(const std::string& _fileName) : Entity(_fileName) {
 	sf::Texture texture;
 	texture.loadFromFile("Resources/dino_1.png");
@@ -25,6 +27,7 @@ void Dino::Update() {
 	if (m_isOnGround) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
 			Jump();
+			SoundManager::Instance().PlaySFX("jump");
 			m_isOnGround = false;
 		}
 	}
@@ -62,6 +65,7 @@ void Dino::CheckCollisions(const std::vector<Cactus>& _cacti)
 	if(isOverlapping)
 	{
 		setTexture(m_frames[3]);
+		SoundManager::Instance().PlaySFX("dead");
 		m_isDead = true;
 	}
 }

@@ -2,12 +2,14 @@
 #include "Cactus.h"
 #include "Constants.h"
 #include "Dino.h"
+#include "SoundManager.h"
 
 int random_range(const int _min, const int _max) {
 	return _min + rand() % ((_max + 1) - _min);
 }
 
 int main() {
+	SoundManager sound;
 	srand(time(nullptr));
 	sf::RenderWindow window(sf::VideoMode(constants::k_screenWidth, constants::k_screenHeight), "Chrome Snake Game");
 	window.setFramerateLimit(60);
