@@ -1,9 +1,7 @@
 #pragma once
-#include "SFML/Graphics.hpp"
-#include "Constants.h"
 #include "Entity.h"
 
-class Dino : public Entity {
+class Dino final : public Entity {
 public:
 	explicit Dino(const std::string& _fileName);
 	void Update();

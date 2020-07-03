@@ -26,6 +26,9 @@ void Dino::Update() {
 }
 
 void Dino::Jump() {
-	m_velocity.y = -m_jumpForce;
+	// only jump if on the ground
+	if (getPosition().y == constants::k_screenHeight - m_size) {
+		m_velocity.y = -m_jumpForce;
+	}
 	// m_position += m_velocity;
 }
