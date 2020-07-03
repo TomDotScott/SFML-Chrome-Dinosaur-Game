@@ -11,7 +11,7 @@ int main() {
 	srand(time(nullptr));
 	sf::RenderWindow window(sf::VideoMode(constants::k_screenWidth, constants::k_screenHeight), "Chrome Snake Game");
 	window.setFramerateLimit(60);
-	Dino dino("dino.png");
+	Dino dino("dino_1.png");
 
 	// basic object pooling
 	std::vector<Cactus> cactiPool;
@@ -32,23 +32,30 @@ int main() {
 			}
 		}
 
-		if(random_range(1, 100) == 1)
+		if(random_range(1, 100) <= 3)
 		{
-			cactiPool[random_range(0, cactiPool.size() - 1)].MakeVisible();
+			int index = random_range(0, cactiPool.size() - 1);
+			if (!cactiPool[index].IsVisible()) {
+				cactiPool[index].MakeVisible();
+			}
 		}
 		
 		window.clear(sf::Color::White);
 
 		for (auto& cactus : cactiPool) {
 			if (cactus.IsVisible()) {
-				cactus.Update();
+				if (!dino.Dead()) {
+					cactus.Update();
+				}
 				cactus.Render(window);
 			}
 		}
 
-		dino.Update();
+		if (!dino.Dead()) {
+			dino.Update();
 
-		dino.CheckCollisions(cactiPool);
+			dino.CheckCollisions(cactiPool);
+		}
 
 		dino.Render(window);
 

@@ -4,10 +4,8 @@
 
 Entity::Entity(const std::string& _fileName)
 {
-	if(m_texture.loadFromFile("Resources/" + _fileName))
-	{
-		std::cout << "TEXTURE LOADED CORRECTLY" << std::endl;
-	};
+	m_texture.loadFromFile("Resources/" + _fileName);
+	
 	setTexture(m_texture);
 }
 
