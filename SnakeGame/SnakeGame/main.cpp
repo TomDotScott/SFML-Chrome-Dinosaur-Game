@@ -1,14 +1,13 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Constants.h"
+#include "Dino.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Chrome Snake Game");
+    sf::RenderWindow window(sf::VideoMode(constants::k_screenWidth, constants::k_screenHeight), "Chrome Snake Game");
 
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    std::cout << "SnakeGame: Starting" << std::endl;
+    Dino dino;
 
     while (window.isOpen())
     {
@@ -27,7 +26,7 @@ int main()
 
         window.clear();
 
-        window.draw(shape);
+        dino.Render(window);
 
         window.display();
     }
