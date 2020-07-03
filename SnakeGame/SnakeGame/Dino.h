@@ -4,15 +4,19 @@
 
 class Dino {
 public:
+	Dino();
 	void Update();
 	void Render(sf::RenderWindow& _window);
 private:
 	void Jump();
 
+	sf::Sprite m_sprite;
+	sf::Texture m_texture;
+	
 	sf::Vector2f m_position{ 50, constants::k_screenHeight - 50 };
 
 	// going here because it's the only thing affected by it
-	float m_gravity{ 0.5f };
+	float m_gravity{ 0.75f };
 
 	float m_size{ 50 };
 

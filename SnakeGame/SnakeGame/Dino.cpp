@@ -1,5 +1,17 @@
 #include "Dino.h"
 
+#include <iostream>
+
+Dino::Dino()
+{
+	if(m_texture.loadFromFile("Resources/dino.png"))
+	{
+		std::cout << "TEXTURE LOADED" << std::endl;
+	}
+	
+	m_sprite.setTexture(m_texture);
+}
+
 void Dino::Update() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
 		Jump();
@@ -15,9 +27,10 @@ void Dino::Update() {
 }
 
 void Dino::Render(sf::RenderWindow& _window) {
-	sf::RectangleShape rect({ m_size, m_size });
-	rect.setPosition(m_position);
-	_window.draw(rect);
+	// sf::RectangleShape rect({ m_size, m_size });
+	// rect.setPosition(m_position);
+	m_sprite.setPosition(m_position);
+	_window.draw(m_sprite);
 }
 
 void Dino::Jump() {

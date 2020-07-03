@@ -24,7 +24,8 @@ int main()
           }
         }
 
-        window.clear();
+        window.clear(sf::Color::White);
+    	
     	
         dino.Update();
         dino.Render(window);
